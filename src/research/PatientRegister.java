@@ -61,6 +61,12 @@ public class PatientRegister extends javax.swing.JFrame {
             }
         });
 
+        PhoneTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PhoneTextFieldActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Password");
 
         jLabel2.setText("Confirm Password");
@@ -93,7 +99,7 @@ public class PatientRegister extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 62, Short.MAX_VALUE)
+                .addGap(0, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
@@ -120,7 +126,7 @@ public class PatientRegister extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(97, Short.MAX_VALUE)
+                .addContainerGap(74, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -230,6 +236,10 @@ public class PatientRegister extends javax.swing.JFrame {
     private void UserIDTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIDTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UserIDTextField1ActionPerformed
+
+    private void PhoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PhoneTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
