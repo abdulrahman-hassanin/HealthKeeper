@@ -5,12 +5,13 @@
  */
 package research;
 
-import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import java.awt.HeadlessException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 /**
@@ -37,10 +38,10 @@ public class PatientRegister extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        UserIDTextField = new javax.swing.JTextField();
         PasswordTextField = new javax.swing.JTextField();
-        BirthDayTextField = new javax.swing.JTextField();
+        ConfirmPasswordTextField = new javax.swing.JTextField();
         PhoneTextField = new javax.swing.JTextField();
+        NameTextField = new javax.swing.JTextField();
         AddressTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -48,22 +49,22 @@ public class PatientRegister extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         RegisterButton = new javax.swing.JButton();
-        ConfirmPasswordTextField = new javax.swing.JTextField();
+        BirthdayTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        UserIDTextField1 = new javax.swing.JTextField();
+        UserNameTextField1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        UserIDTextField.addActionListener(new java.awt.event.ActionListener() {
+        PasswordTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UserIDTextFieldActionPerformed(evt);
+                PasswordTextFieldActionPerformed(evt);
             }
         });
 
-        PhoneTextField.addActionListener(new java.awt.event.ActionListener() {
+        NameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PhoneTextFieldActionPerformed(evt);
+                NameTextFieldActionPerformed(evt);
             }
         });
 
@@ -86,9 +87,9 @@ public class PatientRegister extends javax.swing.JFrame {
 
         jLabel6.setText("Address");
 
-        UserIDTextField1.addActionListener(new java.awt.event.ActionListener() {
+        UserNameTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UserIDTextField1ActionPerformed(evt);
+                UserNameTextField1ActionPerformed(evt);
             }
         });
 
@@ -110,13 +111,13 @@ public class PatientRegister extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(UserIDTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PhoneTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UserNameTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AddressTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UserIDTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PasswordTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ConfirmPasswordTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BirthDayTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BirthdayTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PhoneTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(80, 80, 80))
             .addGroup(layout.createSequentialGroup()
                 .addGap(153, 153, 153)
@@ -128,27 +129,27 @@ public class PatientRegister extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(74, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UserIDTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UserNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UserIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ConfirmPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ConfirmPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BirthdayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BirthDayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -162,41 +163,47 @@ public class PatientRegister extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UserIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIDTextFieldActionPerformed
+    private void PasswordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UserIDTextFieldActionPerformed
+    }//GEN-LAST:event_PasswordTextFieldActionPerformed
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
         // TODO add your handling code here:
         Connection myconobj = null;
         Statement mystatobj = null;
         ResultSet myresobj = null;
-
+        
+        String dbHost = "jdbc:derby://localhost:1527/MyDB";
+        String dbUsrname = "elzoz";
+        String dbPass = "123465";
+        
         try
         {
-            myconobj = DriverManager.getConnection("jdbc:derby://localhost:1527/MyDB", "abdo", "abdo");
+            myconobj = DriverManager.getConnection(dbHost, dbUsrname, dbPass);
             
-            String userID = "";
+            String userName = "";
+            String name = "";
             String pass = "";
             String phone = "";
             String birthDay = "";
             String address= "";
             
-            if(ConfirmPasswordTextField.getText().equals(PasswordTextField.getText()))
-                pass = PasswordTextField.getText();            
-            if(!(UserIDTextField.getText().equals("")))
-                userID = UserIDTextField.getText();
-            if(!(BirthDayTextField.getText().equals("")))
-                birthDay = BirthDayTextField.getText();
-            if(!(PhoneTextField.getText()).equals(""))
-                phone = PhoneTextField.getText();
+     
+            if(BirthdayTextField.getText().equals(ConfirmPasswordTextField.getText()))
+                pass = ConfirmPasswordTextField.getText();            
+            if(!(PasswordTextField.getText().equals("")))
+                userName = PasswordTextField.getText();
+            if(!(PhoneTextField.getText().equals("")))
+                birthDay = PhoneTextField.getText();
+            if(!(NameTextField.getText()).equals(""))
+                phone = NameTextField.getText();
             if(!(AddressTextField.getText()).equals(""))
                 address = AddressTextField.getText();
 
             String query = "INSERT INTO PATIENT VALUES (?, ? , ?, ?, ?)";
 
             PreparedStatement pstmt = myconobj.prepareStatement(query);
-            pstmt.setString(1, userID);
+            pstmt.setString(1, userName);
             pstmt.setString(2, pass);
             pstmt.setString(3, birthDay);
             pstmt.setString(4, phone);
@@ -212,16 +219,16 @@ public class PatientRegister extends javax.swing.JFrame {
         }
         catch(HeadlessException | SQLException e)
         {   
-            if(UserIDTextField.getText().equals(""))
+            if(PasswordTextField.getText().equals(""))
                 JOptionPane.showMessageDialog(this, "Enter a username", "ERROR", 
                                                 JOptionPane.ERROR_MESSAGE);           
-            else if(!(ConfirmPasswordTextField.getText().equals(PasswordTextField.getText())))
+            else if(!(BirthdayTextField.getText().equals(ConfirmPasswordTextField.getText())))
                 JOptionPane.showMessageDialog(this, "Password doesn't match"
                         , "ERROR", JOptionPane.ERROR_MESSAGE);
-            else if(BirthDayTextField.getText().equals(""))
+            else if(PhoneTextField.getText().equals(""))
                 JOptionPane.showMessageDialog(this, "Please enter your birthday"
                         , "ERROR", JOptionPane.ERROR_MESSAGE);
-            else if(PhoneTextField.getText().equals(""))
+            else if(NameTextField.getText().equals(""))
                 JOptionPane.showMessageDialog(this, 
                         "Please enter your Phone number", 
                         "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -229,17 +236,17 @@ public class PatientRegister extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please enter your address"
                         , "ERROR", JOptionPane.ERROR_MESSAGE);     
             else
-                System.out.println(e.toString());            
+                System.out.println(e.getMessage());            
         }        
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
-    private void UserIDTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIDTextField1ActionPerformed
+    private void UserNameTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserNameTextField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UserIDTextField1ActionPerformed
+    }//GEN-LAST:event_UserNameTextField1ActionPerformed
 
-    private void PhoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneTextFieldActionPerformed
+    private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PhoneTextFieldActionPerformed
+    }//GEN-LAST:event_NameTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,13 +285,13 @@ public class PatientRegister extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AddressTextField;
-    private javax.swing.JTextField BirthDayTextField;
+    private javax.swing.JTextField BirthdayTextField;
     private javax.swing.JTextField ConfirmPasswordTextField;
+    private javax.swing.JTextField NameTextField;
     private javax.swing.JTextField PasswordTextField;
     private javax.swing.JTextField PhoneTextField;
     private javax.swing.JButton RegisterButton;
-    private javax.swing.JTextField UserIDTextField;
-    private javax.swing.JTextField UserIDTextField1;
+    private javax.swing.JTextField UserNameTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
