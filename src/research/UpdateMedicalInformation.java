@@ -6,11 +6,16 @@
 package research;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,6 +30,9 @@ public class UpdateMedicalInformation extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setSize(450, 550);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+       LocalDateTime now = LocalDateTime.now(); 
+       date.setText(dtf.format(now));
     }
 
     /**
@@ -307,11 +315,14 @@ public class UpdateMedicalInformation extends javax.swing.JFrame {
                     sPulseRate.trim().isEmpty()||sWater.trim().isEmpty()||
                     sUrination.trim().isEmpty()||sGloucose.trim().isEmpty()||
                     sSystolic.trim().isEmpty()||sDiastolic.trim().isEmpty())
-                System.err.println("Please fill all data");
+                
+                     JOptionPane.showMessageDialog(this, "Please fill all data", "ERROR",
+                             JOptionPane.ERROR_MESSAGE);
+
             else{
-            Connection con=DriverManager.getConnection("jdbc:derby://localhost:1527/MyDB", "ziad", "123456");
-            PreparedStatement st=con.prepareStatement("insert into MEDICAL_INFO (USER_ID,DATE,BLOOD_TYPE,HEIGHT,WEIGHT,PULSE_RATE,NUMBER_OF_WATER,URENATION,GLOUCOSE,SYSTOLIC,DIASTOLIC)values(?,?,?,?,?,?,?,?,?,?,?)");
-            st.setString(1, "");
+            Connection con=DriverManager.getConnection("jdbc:derby://localhost:1527/Database", "ziad", "123456");
+            PreparedStatement st=con.prepareStatement("INSERT INTO MEDICAL_INFO values(?,?,?,?,?,?,?,?,?,?,?)");
+            st.setString(1, home.USER_NAME);
             st.setString(2, sDate);
             st.setString(3, sBloodType);
             st.setString(4, sHeight);
@@ -323,8 +334,13 @@ public class UpdateMedicalInformation extends javax.swing.JFrame {
             st.setString(10, sSystolic);
             st.setString(11, sDiastolic);
             int i=st.executeUpdate();
-            System.out.println("Record number: "+i+" inserted");
+            JOptionPane.showMessageDialog(this,"You have Updated The data successfully!", "Confirm", JOptionPane.INFORMATION_MESSAGE);
             con.close();
+             // return to main page
+                mainpage m = new mainpage();
+                m.setVisible(true);
+                m.setTitle("MainPage");
+                this.setVisible(false);
             }
             
         } 

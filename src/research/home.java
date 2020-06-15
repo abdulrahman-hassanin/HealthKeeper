@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author Abdullah
  */
 public class home extends javax.swing.JFrame {
-    public static String userName;
+    public static String USER_NAME;
     /**
      * Creates new form home
      */
@@ -131,11 +131,11 @@ public class home extends javax.swing.JFrame {
 
     private void LoginButtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtinActionPerformed
         // TODO add your handling code here:
-        userName = username.getText();
+        USER_NAME = username.getText();
         String pass = pas.getText();
         try
         {
-            if(userName.isEmpty())
+            if(USER_NAME.isEmpty())
                 JOptionPane.showMessageDialog(this, "Please enter your username", "ERROR", JOptionPane.ERROR_MESSAGE);
             else if(pass.isEmpty())
                 JOptionPane.showMessageDialog(this, "Please enter your password", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -163,14 +163,14 @@ public class home extends javax.swing.JFrame {
                 
                 // check if the user name has been used before
                 PreparedStatement pstmt = myconobj.prepareStatement(usr_query);
-                pstmt.setString(1, userName);
+                pstmt.setString(1, USER_NAME);
                 ResultSet rs = pstmt.executeQuery(); 
                 if(!(rs.next()))
                     JOptionPane.showMessageDialog(this, "User name is wrong", "ERROR", JOptionPane.ERROR_MESSAGE);                    
                 else{
                     // get user password
                     pstmt = myconobj.prepareStatement(pass_query);
-                    pstmt.setString(1, userName);
+                    pstmt.setString(1, USER_NAME);
                     rs = pstmt.executeQuery();
                     rs.next();
                     String db_pass = rs.getString(pass_col);
