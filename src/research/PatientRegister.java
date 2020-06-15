@@ -27,6 +27,7 @@ public class PatientRegister extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setSize(450, 550);
+        this.setTitle("Register as a patient");
     }
 
     /**
@@ -41,7 +42,6 @@ public class PatientRegister extends javax.swing.JFrame {
         PasswordTextField = new javax.swing.JTextField();
         ConfirmPasswordTextField = new javax.swing.JTextField();
         PhoneTextField = new javax.swing.JTextField();
-        NameTextField = new javax.swing.JTextField();
         AddressTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -52,19 +52,12 @@ public class PatientRegister extends javax.swing.JFrame {
         BirthdayTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         UserNameTextField1 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         PasswordTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PasswordTextFieldActionPerformed(evt);
-            }
-        });
-
-        NameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NameTextFieldActionPerformed(evt);
             }
         });
 
@@ -93,45 +86,38 @@ public class PatientRegister extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Name");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(UserNameTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddressTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PasswordTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ConfirmPasswordTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BirthdayTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PhoneTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(153, 153, 153)
-                .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(UserNameTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AddressTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PasswordTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ConfirmPasswordTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BirthdayTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PhoneTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
+                .addContainerGap(89, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UserNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
@@ -155,7 +141,7 @@ public class PatientRegister extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(50, 50, 50)
+                .addGap(88, 88, 88)
                 .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -169,84 +155,64 @@ public class PatientRegister extends javax.swing.JFrame {
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
         // TODO add your handling code here:
-        Connection myconobj = null;
-        Statement mystatobj = null;
-        ResultSet myresobj = null;
-        
-        String dbHost = "jdbc:derby://localhost:1527/MyDB";
-        String dbUsrname = "elzoz";
-        String dbPass = "123465";
+        String userName = UserNameTextField1.getText();
+        String birthDay = BirthdayTextField.getText();
+        String phone = PhoneTextField.getText();
+        String address = AddressTextField.getText();
+        String pass = PasswordTextField.getText();
+        String confirmPass = ConfirmPasswordTextField.getText();
         
         try
         {
-            myconobj = DriverManager.getConnection(dbHost, dbUsrname, dbPass);
+            if(userName.isEmpty() || birthDay.isEmpty() || phone.isEmpty() || 
+                    address.isEmpty() || pass.isEmpty() || confirmPass.isEmpty())
+                JOptionPane.showMessageDialog(this, "Please fill all data", "ERROR", JOptionPane.ERROR_MESSAGE);
+            else if(!(pass.equals(confirmPass)))
+                JOptionPane.showMessageDialog(this, "password doesn't match", "ERROR", JOptionPane.ERROR_MESSAGE);
             
-            String userName = "";
-            String name = "";
-            String pass = "";
-            String phone = "";
-            String birthDay = "";
-            String address= "";
-            
-     
-            if(BirthdayTextField.getText().equals(ConfirmPasswordTextField.getText()))
-                pass = ConfirmPasswordTextField.getText();            
-            if(!(PasswordTextField.getText().equals("")))
-                userName = PasswordTextField.getText();
-            if(!(PhoneTextField.getText().equals("")))
-                birthDay = PhoneTextField.getText();
-            if(!(NameTextField.getText()).equals(""))
-                phone = NameTextField.getText();
-            if(!(AddressTextField.getText()).equals(""))
-                address = AddressTextField.getText();
+            else{
+                String dbHost = "jdbc:derby://localhost:1527/Database";
+                String dbUsrname = "ziad";
+                String dbPass = "123456";
 
-            String query = "INSERT INTO PATIENT VALUES (?, ? , ?, ?, ?)";
+                Connection myconobj = DriverManager.getConnection(dbHost, dbUsrname, dbPass);
 
-            PreparedStatement pstmt = myconobj.prepareStatement(query);
-            pstmt.setString(1, userName);
-            pstmt.setString(2, pass);
-            pstmt.setString(3, birthDay);
-            pstmt.setString(4, phone);
-            pstmt.setString(5, address);
-            pstmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(this,"You have registered successfully!", "Confirm", JOptionPane.INFORMATION_MESSAGE);
-            
-            home p2 = new home();
-            p2.setVisible(true);
-            p2.setTitle("Home");
-            this.setVisible(false);
+                // check if the user name has been used before
+                String query = "SELECT USER_ID FROM PATIENT WHERE USER_ID=(?)";
+                PreparedStatement pstmt = myconobj.prepareStatement(query);
+                pstmt.setString(1, userName);
+                ResultSet rs = pstmt.executeQuery(); 
+                if(rs.next())
+                    JOptionPane.showMessageDialog(this, "User name is used, please choose another", "ERROR", JOptionPane.ERROR_MESSAGE);                    
+                
+                //  insert into database
+                query = "INSERT INTO PATIENT VALUES (?, ? , ?, ?, ?)";
+                pstmt = myconobj.prepareStatement(query);
+                pstmt.setString(1, userName);
+                pstmt.setString(2, pass);
+                pstmt.setString(3, birthDay);
+                pstmt.setString(4, phone);
+                pstmt.setString(5, address);
+                pstmt.executeUpdate();
+                    
+                JOptionPane.showMessageDialog(this,"You have registered successfully!", "Confirm", JOptionPane.INFORMATION_MESSAGE);
+                
+                // return to home page
+                home p2 = new home();
+                p2.setVisible(true);
+                p2.setTitle("Home");
+                this.setVisible(false);
+            }
         }
         catch(HeadlessException | SQLException e)
         {   
-            if(PasswordTextField.getText().equals(""))
-                JOptionPane.showMessageDialog(this, "Enter a username", "ERROR", 
-                                                JOptionPane.ERROR_MESSAGE);           
-            else if(!(BirthdayTextField.getText().equals(ConfirmPasswordTextField.getText())))
-                JOptionPane.showMessageDialog(this, "Password doesn't match"
-                        , "ERROR", JOptionPane.ERROR_MESSAGE);
-            else if(PhoneTextField.getText().equals(""))
-                JOptionPane.showMessageDialog(this, "Please enter your birthday"
-                        , "ERROR", JOptionPane.ERROR_MESSAGE);
-            else if(NameTextField.getText().equals(""))
-                JOptionPane.showMessageDialog(this, 
-                        "Please enter your Phone number", 
-                        "ERROR", JOptionPane.ERROR_MESSAGE);
-            else if(AddressTextField.getText().equals(""))   
-                JOptionPane.showMessageDialog(this, "Please enter your address"
-                        , "ERROR", JOptionPane.ERROR_MESSAGE);     
-            else
-                System.out.println(e.getMessage());            
-        }        
+            System.out.println(e.getMessage());            
+        }      
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void UserNameTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserNameTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UserNameTextField1ActionPerformed
-
-    private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NameTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,7 +253,6 @@ public class PatientRegister extends javax.swing.JFrame {
     private javax.swing.JTextField AddressTextField;
     private javax.swing.JTextField BirthdayTextField;
     private javax.swing.JTextField ConfirmPasswordTextField;
-    private javax.swing.JTextField NameTextField;
     private javax.swing.JTextField PasswordTextField;
     private javax.swing.JTextField PhoneTextField;
     private javax.swing.JButton RegisterButton;
@@ -298,6 +263,5 @@ public class PatientRegister extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }
