@@ -6,9 +6,12 @@
 package research;
 
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
@@ -17,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author Abdullah
  */
 public class home extends javax.swing.JFrame {
-
+    public static String userName;
     /**
      * Creates new form home
      */
@@ -44,6 +47,8 @@ public class home extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         LoginButtin = new javax.swing.JButton();
+        PatientCheckBox1 = new javax.swing.JCheckBox();
+        DoctorCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,7 +95,25 @@ public class home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(LoginButtin);
-        LoginButtin.setBounds(170, 200, 80, 25);
+        LoginButtin.setBounds(180, 230, 80, 25);
+
+        PatientCheckBox1.setText("Patient");
+        PatientCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PatientCheckBox1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(PatientCheckBox1);
+        PatientCheckBox1.setBounds(100, 190, 93, 25);
+
+        DoctorCheckBox.setText("Doctor");
+        DoctorCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DoctorCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(DoctorCheckBox);
+        DoctorCheckBox.setBounds(240, 190, 65, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,7 +130,70 @@ public class home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginButtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtinActionPerformed
-        Connection myconobj = null;
+        // TODO add your handling code here:
+        userName = username.getText();
+        String pass = pas.getText();
+        try
+        {
+            if(userName.isEmpty())
+                JOptionPane.showMessageDialog(this, "Please enter your username", "ERROR", JOptionPane.ERROR_MESSAGE);
+            else if(pass.isEmpty())
+                JOptionPane.showMessageDialog(this, "Please enter your password", "ERROR", JOptionPane.ERROR_MESSAGE);
+            else if(!(PatientCheckBox1.isSelected()) && !(DoctorCheckBox.isSelected()))
+                JOptionPane.showMessageDialog(this, "Please check your are a patient or a doctor", "ERROR", JOptionPane.ERROR_MESSAGE);
+            
+            else{
+                String dbHost = "jdbc:derby://localhost:1527/Database";
+                String dbUsrname = "ziad";
+                String dbPass = "123456";
+
+                Connection myconobj = DriverManager.getConnection(dbHost, dbUsrname, dbPass);
+
+                // check if user is doctor or patient
+                String usr_query, pass_query, pass_col;
+                if(PatientCheckBox1.isSelected()){
+                    usr_query = "SELECT USER_ID FROM PATIENT WHERE USER_ID=(?)";
+                    pass_query = "SELECT PASSWORD FROM PATIENT WHERE USER_ID=(?)";
+                    pass_col = "PASSWORD";
+                }else{
+                    usr_query = "SELECT DOC_ID FROM DOCTOR WHERE DOC_ID=(?)";
+                    pass_query = "SELECT PASS FROM DOCTOR WHERE DOC_ID=(?)";
+                    pass_col = "PASS";
+                }
+                
+                // check if the user name has been used before
+                PreparedStatement pstmt = myconobj.prepareStatement(usr_query);
+                pstmt.setString(1, userName);
+                ResultSet rs = pstmt.executeQuery(); 
+                if(!(rs.next()))
+                    JOptionPane.showMessageDialog(this, "User name is wrong", "ERROR", JOptionPane.ERROR_MESSAGE);                    
+                else{
+                    // get user password
+                    pstmt = myconobj.prepareStatement(pass_query);
+                    pstmt.setString(1, userName);
+                    rs = pstmt.executeQuery();
+                    rs.next();
+                    String db_pass = rs.getString(pass_col);
+                    
+                    // check password
+                    if(db_pass.equals(pass)) {
+                        // return to home page
+                        mainpage p2 = new mainpage();
+                        p2.setVisible(true);
+                        p2.setTitle("mianpage");
+                        this.setVisible(false);
+                    }else{
+                        JOptionPane.showMessageDialog(this, "password is wrong", "ERROR", JOptionPane.ERROR_MESSAGE);                    
+                    }
+                }
+            }
+        }
+        catch(HeadlessException | SQLException e)
+        {   
+            System.out.println(e.getMessage());            
+        }      
+        
+        /*Connection myconobj = null;
         Statement mystatobj = null;
         ResultSet myresobj = null;
         String query = "Select * from ABDO.PATIENT";    
@@ -145,7 +231,7 @@ public class home extends javax.swing.JFrame {
         catch(Exception e)
         {
             System.out.println(e.toString());
-        }    
+        }*/
     }//GEN-LAST:event_LoginButtinActionPerformed
 
     private void RegisterPastientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterPastientButtonActionPerformed
@@ -159,6 +245,14 @@ public class home extends javax.swing.JFrame {
         this.setVisible(false);
         new DoctorRegister().setVisible(true);
     }//GEN-LAST:event_RegisterDoctorButtonActionPerformed
+
+    private void PatientCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PatientCheckBox1ActionPerformed
+
+    private void DoctorCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DoctorCheckBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,7 +291,9 @@ public class home extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox DoctorCheckBox;
     private javax.swing.JButton LoginButtin;
+    private javax.swing.JCheckBox PatientCheckBox1;
     private javax.swing.JButton RegisterDoctorButton;
     private javax.swing.JButton RegisterPastientButton;
     private javax.swing.JLabel jLabel1;
