@@ -5,6 +5,14 @@
  */
 package research;
 
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kcsstore.com
@@ -37,7 +45,7 @@ public class Medicines extends javax.swing.JFrame {
         doseTF = new javax.swing.JTextField();
         MedTF = new javax.swing.JTextField();
         doseTimeTF = new javax.swing.JTextField();
-        alarmButton = new javax.swing.JButton();
+        AddMedecine = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,10 +81,10 @@ public class Medicines extends javax.swing.JFrame {
             }
         });
 
-        alarmButton.setText("Add to Alarm");
-        alarmButton.addActionListener(new java.awt.event.ActionListener() {
+        AddMedecine.setText("Add Medecine");
+        AddMedecine.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alarmButtonActionPerformed(evt);
+                AddMedecineActionPerformed(evt);
             }
         });
 
@@ -110,7 +118,7 @@ public class Medicines extends javax.swing.JFrame {
                                     .addComponent(MedCAtTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
-                        .addComponent(alarmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(AddMedecine, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -133,7 +141,7 @@ public class Medicines extends javax.swing.JFrame {
                     .addComponent(doseTime, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(doseTimeTF, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
-                .addComponent(alarmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AddMedecine, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
@@ -156,9 +164,50 @@ public class Medicines extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_doseTimeTFActionPerformed
 
-    private void alarmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alarmButtonActionPerformed
+    private void AddMedecineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddMedecineActionPerformed
+        // TODO add your handling code here:
+        String medName = MedTF.getText();
+        String medCat = MedCAtTF.getText();
+        String dailyDose = doseTF.getText();
+        String dailyDoseTime = doseTime.getText();
+
         
-    }//GEN-LAST:event_alarmButtonActionPerformed
+        try
+        {
+            if(medName.isEmpty() || medCat.isEmpty() || dailyDose.isEmpty() || 
+                    dailyDoseTime.isEmpty())
+                JOptionPane.showMessageDialog(this, "Please fill all data", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+            else{
+                String dbHost = "jdbc:derby://localhost:1527/Database";
+                String dbUsrname = "ziad";
+                String dbPass = "123456";
+
+                Connection myconobj = DriverManager.getConnection(dbHost, dbUsrname, dbPass);
+
+                //  insert into database
+                String query = "INSERT INTO PATIENT VALUES (?, ? , ?, ?)";
+                PreparedStatement pstmt = myconobj.prepareStatement(query);
+                pstmt.setString(1, userName);
+                pstmt.setString(2, pass);
+                pstmt.setString(3, birthDay);
+                pstmt.executeUpdate();
+                    
+                JOptionPane.showMessageDialog(this,"You have registered successfully!", "Confirm", JOptionPane.INFORMATION_MESSAGE);
+                
+                // return to home page
+                home p2 = new home();
+                p2.setVisible(true);
+                p2.setTitle("Home");
+                this.setVisible(false);
+            }
+        }
+        catch(HeadlessException | SQLException e)
+        {   
+            System.out.println(e.getMessage());            
+        }      
+        
+    }//GEN-LAST:event_AddMedecineActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,10 +245,10 @@ public class Medicines extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddMedecine;
     private javax.swing.JLabel Dose;
     private javax.swing.JTextField MedCAtTF;
     private javax.swing.JTextField MedTF;
-    private javax.swing.JButton alarmButton;
     private javax.swing.JTextField doseTF;
     private javax.swing.JLabel doseTime;
     private javax.swing.JTextField doseTimeTF;
