@@ -5,6 +5,14 @@
  */
 package research;
 
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import static research.home.USER_NAME;
+
 /**
  *
  * @author AbdUlraHman
@@ -16,6 +24,46 @@ public class Contacts extends javax.swing.JFrame {
      */
     public Contacts() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        
+        try{
+                String dbHost = "jdbc:derby://localhost:1527/Database";
+                String dbUsrname = "ziad";
+                String dbPass = "123456";
+                Connection myconobj = DriverManager.getConnection(dbHost, dbUsrname, dbPass);
+
+                String parent_query = "SELECT * FROM PARENT WHERE USER_ID = (?)";
+                String doctor_query = "SELECT * FROM DOCTOR WHERE USER_ID = (?)";
+
+                PreparedStatement pstmt = myconobj.prepareStatement(parent_query);
+                pstmt.setString(1, home.USER_NAME);
+                ResultSet rs = pstmt.executeQuery(); 
+                rs.next();
+                String parent_Name = rs.getString("Name");
+                String parent_Email = rs.getString("EMAIL");
+                String parent_Phone = rs.getString("PHONE");
+                
+                pstmt = myconobj.prepareStatement(doctor_query);
+                pstmt.setString(1, home.USER_NAME);
+                rs = pstmt.executeQuery(); 
+                rs.next();
+                String doc_Name = rs.getString("Name");
+                String doc_Email = rs.getString("EMAIL");
+                String doc_Phone = rs.getString("PHONE");
+                
+                parentName.setText(parent_Name);
+                parentEmail.setText(parent_Email);
+                parentPhone.setText(parent_Phone);
+                docName.setText(doc_Name);
+                docEmail.setText(doc_Email);
+                docPhone.setText(doc_Phone);
+                
+            
+        }
+        catch(HeadlessException | SQLException e)
+        {   
+            System.out.println(e.getMessage());            
+        }      
     }
 
     /**
@@ -28,8 +76,8 @@ public class Contacts extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        UpdateParentInfo = new javax.swing.JButton();
+        UpdateDocInfo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -38,18 +86,28 @@ public class Contacts extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        parentName = new javax.swing.JLabel();
+        parentPhone = new javax.swing.JLabel();
+        parentEmail = new javax.swing.JLabel();
+        docName = new javax.swing.JLabel();
+        docPhone = new javax.swing.JLabel();
+        docEmail = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Update Parent Information");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        UpdateParentInfo.setText("Update Parent Information");
+        UpdateParentInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                UpdateParentInfoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Update Doctor Information");
+        UpdateDocInfo.setText("Update Doctor Information");
+        UpdateDocInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateDocInfoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel1.setText("Parent :");
@@ -69,8 +127,6 @@ public class Contacts extends javax.swing.JFrame {
 
         jLabel8.setText("E-mail:");
 
-        jLabel9.setText("jLabel9");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -78,11 +134,9 @@ public class Contacts extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(115, 115, 115)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel6)
@@ -91,19 +145,27 @@ public class Contacts extends javax.swing.JFrame {
                                 .addGap(3, 3, 3)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
-                                    .addComponent(jLabel7)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel9))
-                                .addComponent(jButton2)
-                                .addComponent(jButton1))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5)
-                        .addGap(204, 204, 204)))
-                .addContainerGap(152, Short.MAX_VALUE))
+                                    .addComponent(jLabel7))))
+                        .addGap(96, 96, 96)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(parentEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(parentName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(parentPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(docName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(docPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(docEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel1))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 136, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(UpdateParentInfo)
+                    .addComponent(UpdateDocInfo))
+                .addGap(131, 131, 131))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,24 +175,34 @@ public class Contacts extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel9))
+                    .addComponent(parentName))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(parentPhone))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(parentEmail))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addGap(20, 20, 20)
-                .addComponent(jLabel6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(docName))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(docPhone))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(47, 47, 47)
-                .addComponent(jButton1)
-                .addGap(51, 51, 51))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(docEmail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addComponent(UpdateDocInfo)
+                .addGap(18, 18, 18)
+                .addComponent(UpdateParentInfo)
+                .addGap(74, 74, 74))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,9 +219,23 @@ public class Contacts extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void UpdateParentInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateParentInfoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        // Go to UpdateParentInfo class
+        UpdateParentInfo p2 = new UpdateParentInfo();
+        p2.setVisible(true);
+        p2.setTitle("Update Parent Information");
+        this.setVisible(false);          
+    }//GEN-LAST:event_UpdateParentInfoActionPerformed
+
+    private void UpdateDocInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateDocInfoActionPerformed
+        // TODO add your handling code here:
+        // Go to UpdateDocInfo class
+        UpdateDoctorInfo p2 = new UpdateDoctorInfo();
+        p2.setVisible(true);
+        p2.setTitle("Update Doctor Information");
+        this.setVisible(false);  
+    }//GEN-LAST:event_UpdateDocInfoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,8 +273,11 @@ public class Contacts extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton UpdateDocInfo;
+    private javax.swing.JButton UpdateParentInfo;
+    private javax.swing.JLabel docEmail;
+    private javax.swing.JLabel docName;
+    private javax.swing.JLabel docPhone;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -197,7 +286,9 @@ public class Contacts extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel parentEmail;
+    private javax.swing.JLabel parentName;
+    private javax.swing.JLabel parentPhone;
     // End of variables declaration//GEN-END:variables
 }

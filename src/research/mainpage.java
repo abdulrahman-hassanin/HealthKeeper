@@ -5,6 +5,10 @@
  */
 package research;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Abdullah
@@ -114,7 +118,11 @@ public class mainpage extends javax.swing.JFrame {
     private void progButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_progButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new Progress().setVisible(true);
+        try {
+            new Progress().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(mainpage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_progButtonActionPerformed
 
     private void medButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medButtonActionPerformed
