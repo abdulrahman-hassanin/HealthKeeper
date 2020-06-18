@@ -1,7 +1,7 @@
-Thu Jun 18 17:31:24 EET 2020 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+Thu Jun 18 20:35:51 EET 2020 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Thu Jun 18 17:31:25 EET 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0172-c80e-4de1-000011829adf 
+Thu Jun 18 20:35:51 EET 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0172-c8b7-2a45-000011829adf 
 on database directory C:\Users\AbdUlraHman\Desktop\3rd computer - research & projects\SW & Database\HealthKeeper\Database with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
 Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_111/db/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,3 +12,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\AbdUlraHman\Desktop\3rd computer - research & projects\SW & Database\HealthKeeper
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Thu Jun 18 21:32:25 EET 2020: Shutting down Derby engine
+----------------------------------------------------------------
+Thu Jun 18 21:32:25 EET 2020:
+Shutting down instance a816c00e-0172-c8b7-2a45-000011829adf on database directory C:\Users\AbdUlraHman\Desktop\3rd computer - research & projects\SW & Database\HealthKeeper\Database with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+----------------------------------------------------------------

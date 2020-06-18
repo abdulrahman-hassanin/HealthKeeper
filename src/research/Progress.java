@@ -37,7 +37,7 @@ public class Progress extends javax.swing.JFrame {
         DefaultListModel urination=new DefaultListModel();
         DefaultListModel water=new DefaultListModel();
         DefaultListModel pulse=new DefaultListModel();
-       dates.setModel(date);
+        dates.setModel(date);
         bloods.setModel(blood);
         glucoses.setModel(glucose);
         pulses.setModel(pulse);
@@ -298,7 +298,7 @@ public class Progress extends javax.swing.JFrame {
             resultSet=pstmt.executeQuery();
             while(resultSet.next()){
            
-           MedicalInfo m=new MedicalInfo();
+            MedicalInfo m=new MedicalInfo();
             m.setGloucose(resultSet.getString("GLOUCOSE"));
             m.setDate(resultSet.getString("DATE"));
             m.setBlood_pressure(resultSet.getString("SYSTOLIC")+"/"+resultSet.getString("DIASTOLIC"));
@@ -309,6 +309,6 @@ public class Progress extends javax.swing.JFrame {
             resultSet.close();
             myconobj.close();
             return list;
-                 }
+            }
 
 }

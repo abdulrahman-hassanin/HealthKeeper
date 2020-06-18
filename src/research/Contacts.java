@@ -25,6 +25,7 @@ public class Contacts extends javax.swing.JFrame {
     public Contacts() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setTitle("Contacts");
         
         try{
                 String dbHost = "jdbc:derby://localhost:1527/Database";

@@ -26,6 +26,7 @@ public class Medicines extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setSize(450, 550);
+        this.setTitle("Main Page");
     }
 
     /**
@@ -142,15 +143,14 @@ public class Medicines extends javax.swing.JFrame {
 
     private void AddMedecineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddMedecineActionPerformed
         // TODO add your handling code here:
-        String medName = MedTF.getText();
-        String medCat = MedCAtTF.getText();
+        String medicineName = MedTF.getText();
         String dailyDose = doseTF.getText();
-        String dailyDoseTime = doseTime.getText();
+        String dailyDoseTime = doseTimeTF.getText();
 
         
         try
         {
-            if(medName.isEmpty() || medCat.isEmpty() || dailyDose.isEmpty() || 
+            if(medicineName.isEmpty() || dailyDose.isEmpty() || 
                     dailyDoseTime.isEmpty())
                 JOptionPane.showMessageDialog(this, "Please fill all data", "ERROR", JOptionPane.ERROR_MESSAGE);
 
@@ -161,20 +161,37 @@ public class Medicines extends javax.swing.JFrame {
 
                 Connection myconobj = DriverManager.getConnection(dbHost, dbUsrname, dbPass);
 
-                //  insert into database
-                String query = "INSERT INTO PATIENT VALUES (?, ? , ?, ?)";
+                // check if the medecine has been used before
+                String query = "SELECT * FROM MEDICINE WHERE NAME=(?) and user_id = (?)";
                 PreparedStatement pstmt = myconobj.prepareStatement(query);
-                pstmt.setString(1, userName);
-                pstmt.setString(2, pass);
-                pstmt.setString(3, birthDay);
-                pstmt.executeUpdate();
+                pstmt.setString(1, medicineName);
+                pstmt.setString(2, home.USER_NAME);
+                ResultSet rs = pstmt.executeQuery(); 
+                if(!(rs.next())) {
+                    //  insert into MEDECINE table
+                    query = "INSERT INTO MEDICINE VALUES (?, ? , ?, ?)";
+                    pstmt = myconobj.prepareStatement(query);
+                    pstmt.setString(1, home.USER_NAME);
+                    pstmt.setString(2, medicineName);
+                    pstmt.setString(3, dailyDose);
+                    pstmt.setString(4, dailyDoseTime);
+                    pstmt.executeUpdate();
                     
-                JOptionPane.showMessageDialog(this,"You have registered successfully!", "Confirm", JOptionPane.INFORMATION_MESSAGE);
+                    //  insert into TAKE table
+                    query = "INSERT INTO TAKE VALUES (?, ?)";
+                    pstmt = myconobj.prepareStatement(query);
+                    pstmt.setString(1, home.USER_NAME);
+                    pstmt.setString(2, medicineName);
+                    pstmt.executeUpdate();
+                }
+
+                
+                JOptionPane.showMessageDialog(this,"Medecine added sucessfully!", "Confirm", JOptionPane.INFORMATION_MESSAGE);
                 
                 // return to home page
-                home p2 = new home();
+                mainpage p2 = new mainpage();
                 p2.setVisible(true);
-                p2.setTitle("Home");
+                p2.setTitle("Main Page");
                 this.setVisible(false);
             }
         }
